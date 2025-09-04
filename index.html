@@ -1,67 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ruleta de Preguntas</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background: #f4f4f4; }
+    h1 { color: #333; }
+    #ruleta { width: 200px; height: 200px; background: url("ruleta.jpeg") no-repeat center/cover; margin: 20px auto; border: 4px solid #333; border-radius: 50%; }
+    #pregunta { font-size: 20px; margin: 20px; }
+    #opciones button { display: block; margin: 10px auto; padding: 10px; width: 200px; cursor: pointer; }
+    #ranking { margin-top: 30px; text-align: left; display: inline-block; }
+  </style>
 </head>
 <body>
+  <h1>🎡 Ruleta de Preguntas</h1>
 
-  <!-- Pantalla de inicio -->
-  <section id="start" class="card">
-    <img src="naruto.png" alt="Naruto" class="hero" />
-    <h1>🎡 LUCKY SPINS</h1>
-    <p>Ingresa tu usuario para comenzar</p>
-    <div class="user-row">
-      <input id="username" type="text" placeholder="Tu nombre de usuario" />
-      <button id="btnStart">Iniciar</button>
-    </div>
-    <small>Ganás <strong>10 puntos</strong> por respuesta correcta.</small>
-  </section>
+  <div>
+    <label for="user">Nombre de usuario:</label>
+    <input type="text" id="user" placeholder="Ingresa tu nombre">
+    <button onclick="startGame(document.getElementById('user').value)">Iniciar</button>
+  </div>
 
-  <!-- Juego -->
-  <main id="game" class="hidden">
-    <header class="hud">
-      <div>👤 Usuario: <strong id="hudUser">—</strong></div>
-      <div>⭐ Puntos: <strong id="hudScore">0</strong></div>
-    </header>
+  <div id="ruleta"></div>
+  <button onclick="girarRuleta()">🎵 Girar Ruleta</button>
 
-    <section class="wheel-area">
-      <!-- Puntero fijo -->
-      <div class="pointer"></div>
-      <!-- Imagen de ruleta que GIRA -->
-      <img id="wheel" src="wheel.png" alt="Ruleta" />
-      <button id="btnSpin" class="primary">Girar</button>
-    </section>
+  <h2 id="pregunta">Aquí aparecerá la pregunta</h2>
+  <div id="opciones"></div>
 
-    <section id="qa" class="card hidden">
-      <h2 id="qText">Pregunta…</h2>
-      <form id="answers" class="options">
-        <!-- se rellena por JS con A/B/C/D -->
-      </form>
-      <div class="qa-actions">
-        <button id="btnSubmit" class="primary">Responder</button>
-        <button id="btnNext" class="ghost hidden">Siguiente</button>
-      </div>
-      <p id="feedback"></p>
-    </section>
-
-    <section class="card">
-      <h3>🏆 Ranking</h3>
-      <ol id="ranking"></ol>
-    </section>
-  </main>
-
-  <!-- Mensaje final -->
-  <section id="win" class="card hidden">
-    <h2>🎉 ¡Felicidades, <span id="winUser"></span>!</h2>
-    <p>Completaste todas las preguntas con <strong><span id="winScore"></span> puntos</strong>.</p>
-    <button id="btnRestart">Volver a jugar</button>
-    <canvas id="confetti"></canvas>
-  </section>
+  <h2>🏆 Ranking</h2>
+  <ul id="ranking"></ul>
 
   <script src="script.js"></script>
 </body>
 </html>
-
